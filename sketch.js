@@ -39,7 +39,7 @@ function draw() {
 
   foodObj.display();
 
-  fedTime=database.ref('FeedTime');
+  fedTime=database.ref('feedTime');
   fedTime.on("value",function(data){
    lastFed=data.val();
 
@@ -49,13 +49,16 @@ function draw() {
   textSize(15);
 
   if(lastFed>=12){
-   text("Last Feed:"+lastFed%12+"PM",350,30);   
+   text("Last Feed:"+lastFed%12+"PM",350,30);
+	  bedroom();
   }
   else if(lastFed==0){
-    text("Last Feed:12AM",350,30);   
+    text("Last Feed:12AM",350,30); 
+	  garden();
    }
    else {
-    text("Last Feed:"+lastFed+"AM",350,30);   
+    text("Last Feed:"+lastFed+"AM",350,30); 
+	   washroom();
    }
 
   drawSprites();
@@ -86,4 +89,19 @@ database.ref('/').update({
   Food : foodS
 })
 
+}
+
+function  bedroom(){
+        background(bedroomIMG,width,height);
+        dog.changeAnimation("sleeping",sleepIMG);
+    }
+
+   function  garden(){
+        background(gardenIMG,width,height);
+        dog.changeAnimation("run",runIMG);
+    }
+
+   function  washroom(){
+        background(washroomIMG,width,height);
+    }
 }
